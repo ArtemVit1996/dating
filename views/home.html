@@ -1,9 +1,16 @@
+<!--
+Artem Vityuk
+4/28/2020
+This is the home page of the project.
+It contains all html code that you see when you open the home page.
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Dating</title>
 
+    <!-- Links to bootstrap and css files-->
     <link rel="stylesheet"  type="text/css" href="../styles/styles.css"/>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -11,6 +18,7 @@
 </head>
 <body>
 
+    <!-- Nav bar code with bootstrap -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <span class="navbar-text">Whats the date</span>
         <ul class="navbar-nav">
@@ -20,38 +28,41 @@
         </ul>
     </nav>
 
+    <!-- Main contents of the page with bootstrap classes -->
     <div class="container ">
         <div class="row">
             <div class="col text-center">
+                <!-- Page intro -->
                 <h1>Whats the date?</h1>
                 <p class="">Here at Whats the date we bring you can pair you up for a date no matter what date and day of the week it is.
                     You like going out mondays? Or your'e only free tuesdays? We will pair you up any day of the week no problem</p>
 
+                <!-- user feed back section -->
                 <h3>This is some of the user feedback</h3>
                 <ul class="list-unstyled border-top border-bottom">
+                    <!-- user feedback #1 -->
                     <li class="pb-2">
                         <i><q>Wow I went on a date on a Wednesday!</q> -Kevin</i>
                     </li>
+                    <!-- user feedback #2 -->
                     <li class="pb-2">
                         <i><q>Great and easy to use platform. I highly recommend</q> -Jenna D.</i>
                     </li>
+                    <!-- user feedback #3 -->
                     <li class="pb-2">
                         <i><q>Oh what a wonderful date I had. Thank you Whats the date!</q> -Marcus J.</i>
                     </li>
                 </ul>
+                <!-- button to create the profile -->
                 <button class="btn btn-dark">Create a Profile</button>
 
             </div>
+            <!-- div containing the image bootstrap styled-->
             <div class="col">
-                <img class="img-fluid rounded" src="../images/couple2.jpg" alt="couple">
+                <img class="img-fluid rounded" src="images/couple2.jpg" alt="couple">
             </div>
         </div>
     </div>
-
-
-
-
-
 
 </body>
 </html>
