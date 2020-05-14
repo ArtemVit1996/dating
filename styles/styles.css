@@ -1,0 +1,33 @@
+
+.button {
+    float: right;
+    margin-top: 10px;
+}
+input.radio {
+    display: inline;
+}
+
+label {
+    font-weight: bold;
+}
+
+label.norm {
+    font-weight: normal;
+    margin-right: 2em;
+}
+
+input[type=checkbox] {
+    margin-right: 5px;
+}
+
+h3.activity {
+    margin: 2em 0 1em 0;
+}
+
+.profile {
+    margin: 0;
+    padding: 11px;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+}
+
