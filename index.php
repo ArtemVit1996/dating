@@ -32,7 +32,7 @@ $f3->route('GET|POST /page1', function($f3) {
 
     // If the form has been submitted
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
-        var_dump($_POST); // testing purposes
+        //var_dump($_POST); // testing purposes
         // { ["ftname"]=> string(6) "Artem " ["lname"]=> string(6) "Vityuk"
         // ["age"]=> string(2) "24" ["gender"]=> string(4) "male"
         // ["phone"]=> string(7) "hmmm206" }
@@ -49,10 +49,10 @@ $f3->route('GET|POST /page1', function($f3) {
                 $_SESSION['gender'] = $_POST['gender'];
                 $_SESSION['phone'] = $_POST['phone'];
                 // Reroute to summary to test
-                $f3-> reroute('summary');
+                //$f3-> reroute('summary');
 
         // route to the next page (page2)
-            //$f3-> reroute('page2');
+            $f3-> reroute('page2');
         // }
 
 
@@ -63,9 +63,32 @@ $f3->route('GET|POST /page1', function($f3) {
 });
 
 // page2(profile) route
-$f3->route('GET|POST /page2', function() {
+$f3->route('GET|POST /page2', function($f3) {
 
-    //var_dump($_POST);
+    // If the form has been submitted
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        var_dump($_POST); // testing purposes
+        // { ["ftname"]=> string(6) "Artem " ["lname"]=> string(6) "Vityuk"
+        // ["age"]=> string(2) "24" ["gender"]=> string(4) "male"
+        // ["phone"]=> string(7) "hmmm206" }
+
+        // Validate data here
+        // 4/29 Zoom recording
+        // if ............ { }
+
+        // else (Data is valid) {
+        // store data in the session array
+        $_SESSION['email'] = $_POST['email'];
+        $_SESSION['loc'] = $_POST['loc'];
+        $_SESSION['seeking'] = $_POST['gender'];
+        $_SESSION['bio'] = $_POST['bio'];
+        // Reroute to summary to test
+        //$f3->reroute('summary');
+
+        // route to the next page (page2)
+        $f3-> reroute('page3');
+        // }
+    }
 
 
     $view = new Template();
@@ -73,9 +96,49 @@ $f3->route('GET|POST /page2', function() {
 });
 
 // page3(interests) route
-$f3->route('GET|POST /page3', function() {
+$f3->route('GET|POST /page3', function($f3) {
 
-    var_dump($_POST);
+    // If the form has been submitted
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        //var_dump($_POST); // testing purposes
+        // { ["ftname"]=> string(6) "Artem " ["lname"]=> string(6) "Vityuk"
+        // ["age"]=> string(2) "24" ["gender"]=> string(4) "male"
+        // ["phone"]=> string(7) "hmmm206" }
+
+        // Validate data here
+        // 4/29 Zoom recording
+        // if ............ { }
+
+        // else (Data is valid) {
+        // store data in the session array
+        /*
+        $_SESSION['activity1'] = $_POST['in1'];
+        $_SESSION['activity2'] = $_POST['in2'];
+        $_SESSION['activity3'] = $_POST['in3'];
+        $_SESSION['activity4'] = $_POST['in4'];
+        */
+
+        // define a session array
+        if (!isset($_SESSION['activities'])){
+            $_SESSION['activities'] = array();
+        }
+
+        $count = 1;
+        while ($count < 13){
+            if (!empty($_POST['a'.$count])) {
+                array_push($_SESSION['activities'],$_POST['a'.$count]);
+            }
+            $count++;
+        }
+
+        foreach ($_SESSION['activities'] as $item){
+            echo $item.'<br>';
+        }
+        // route to the summary page
+        $f3-> reroute('summary');
+
+
+    }
 
     $view = new Template();
     echo $view->render('views/page3.html');
@@ -84,13 +147,12 @@ $f3->route('GET|POST /page3', function() {
 // summary route
 $f3->route('GET /summary', function() {
 
-    echo "<h1>Thank you !</h1>";
+    // echo "<h1>Thank you !</h1>";
 
-    //$view = new Template();
-    //echo $view->render('views/page3.html');
+    $view = new Template();
+    echo $view->render('views/summary.html');
+    session_destroy();
 });
-
-
 
 // Run F3
 $f3->run();

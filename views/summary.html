@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Links to bootstrap and css files-->
+    <link rel="stylesheet"  type="text/css" href="styles/styles.css"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <meta charset="UTF-8">
+    <title>Summary Page </title>
+</head>
+<body>
+
+<!-- Nav bar code with bootstrap -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <span class="navbar-text">Whats the date</span>
+    <ul class="navbar-nav">
+        <li class="nav-item>">
+            <a class="nav-link" href="./">Home</a>
+        </li>
+    </ul>
+</nav>
+
+<div class="container ">
+    <div class="row">
+        <div class="col text-center">
+
+            <h1 class="header">Your profile</h1>
+            <p>First name is {{ @SESSION.fname }}</p>
+            <p>Last name is {{ @SESSION.lname }}</p>
+            <p>Age  is {{ @SESSION.age }}</p>
+            <p>Gender is {{ @SESSION.gender }}</p>
+            <p>Phone num is {{ @SESSION.phone }}</p>
+            <p>Email is {{ @SESSION.email }}</p>
+            <p>Location is {{ @SESSION.loc }}</p>
+            <p>Seeking: {{ @SESSION.seeking }}</p>
+            <check if="{{ isset(@SESSION.activities) }}">
+                <p>Activities:  {{ implode(@SESSION.activities, ", ") }}</p>
+            </check>
+
+
+
+        </div>
+        <!-- div containing the image bootstrap styled-->
+        <div class="col">
+            <img class="img-fluid rounded" src="images/profile.png" alt="couple">
+            <p>Bio: {{ @SESSION.bio }}</p>
+        </div>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>

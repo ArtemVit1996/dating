@@ -5,7 +5,7 @@
     <title>Personal Info</title>
 
     <!-- Links to bootstrap and css files-->
-    <link rel="stylesheet"  type="text/css" href=""/>
+    <link rel="stylesheet"  type="text/css" href="styles/styles.css"/>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -18,46 +18,92 @@
     <span class="navbar-text">Whats the date</span>
     <ul class="navbar-nav">
         <li class="nav-item>">
-            <a class="nav-link" href="#"></a>
+            <a class="nav-link" href="./">Home</a>
         </li>
     </ul>
 </nav>
 
-<h1>Interests</h1>
-
-<form action="#" method="post">
-
-    <p>In-door activities</p>
-    <input type="checkbox" id="in1" name="in1" value="Game night">
-    <label for="in1">Game night</label><br>
-    <input type="checkbox" id="in2" name="in2" value="Movie night">
-    <label for="in2">Movie night</label><br>
-    <input type="checkbox" id="in3" name="in3" value="Baking/cooking">
-    <label for="in3">Baking/cooking</label><br>
-    <input type="checkbox" id="in4" name="in4" value="Video games">
-    <label for="in4">Video games</label><br>
-    <input type="checkbox" id="in5" name="in5" value="Writing">
-    <label for="in5">Writing</label><br>
-    <input type="checkbox" id="in6" name="in6" value="Reading">
-    <label for="in6">Reading</label><br><br>
 
 
-    <p>Out-door activities</p>
-    <input type="checkbox" id="out1" name="out1" value="Hiking">
-    <label for="out1">Hiking</label><br>
-    <input type="checkbox" id="out2" name="out2" value="Biking">
-    <label for="out2">Biking</label><br>
-    <input type="checkbox" id="out3" name="out3" value="Snowboarding">
-    <label for="out3">Snowboarding</label><br>
-    <input type="checkbox" id="out4" name="out4" value="Skiing">
-    <label for="out4">Skiing</label><br>
-    <input type="checkbox" id="out5" name="out5" value="Running">
-    <label for="out5">Running</label><br>
-    <input type="checkbox" id="out6" name="out6" value="Roadtrip">
-    <label for="out6">Road-trips</label><br><br>
+<div class="container ">
+    <h1 class="header">Interests</h1>
+    <div class="row">
+        <div class="col">
 
-    <input type="submit" value="Submit">
-</form>
+            <form action="#" method="post">
+
+                <p>In-door activities</p>
+
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="a1">
+                        <input type="checkbox" id="a1" name="a1" value="Game night">Game Night
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="a2">
+                        <input type="checkbox" id="a2" name="a2" value="Movie night">Movie night
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="a3">
+                        <input type="checkbox" id="a3" name="a3" value="Baking/cooking">Baking/Cooking
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="a4">
+                        <input type="checkbox" id="a4" name="a4" value="Video games">Video games
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="a5">
+                        <input type="checkbox" id="a5" name="a5" value="Writing">Writing
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="a6">
+                        <input type="checkbox" id="a6" name="a6" value="Reading">Reading
+                    </label>
+                </div>
+
+                <p>Out-door activities</p>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="a7">
+                        <input type="checkbox" id="a7" name="a7" value="Hiking">Hiking
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="a8">
+                        <input type="checkbox" id="a8" name="a8" value="Biking">Biking
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="a9">
+                        <input type="checkbox" id="a9" name="a9" value="Snowboarding">Snowboarding
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="a10">
+                        <input type="checkbox" id="a10" name="a10" value="Skiing">Skiing
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="a11">
+                        <input type="checkbox" id="a11" name="a11" value="Running">Running
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="a12">
+                        <input type="checkbox" id="a12" name="a12" value="Roadtrips"> Road trips
+                    </label>
+                </div>
+
+                <input type="submit" value="Submit">
+
+            </form>
+        </div>
+    </div>
+
+</div>
 
 </body>
 </html>
