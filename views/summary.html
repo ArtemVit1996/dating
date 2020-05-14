@@ -35,10 +35,10 @@
                 <p class="profile">Email: {{ @SESSION.email }}</p>
                 <p class="profile">State: {{ @SESSION.loc }}</p>
                 <p class="profile">Seeking: {{ @SESSION.seeking }}</p>
-                <check if="{{ isset(@SESSION.activities) }}">
-                    <p class="profile">Interests:  {{ implode(@SESSION.activities, ", ") }}</p>
-                </check>
             </div>
+            <check if="{{ isset(@SESSION.activities) }}">
+                <p class="profile text-left">Interests:  {{ implode(@SESSION.activities, ", ") }}</p>
+            </check>
             <button class="btn btn-primary button">Contact me</button>
 
 
