@@ -15,6 +15,8 @@ session_start();
 
 // Require the autoload file
 require_once("vendor/autoload.php");
+// require the validation file
+require ("model/validation.php");
 
 // Instantiate the F3 Base class
 $f3 = Base::instance();
@@ -30,29 +32,59 @@ $f3->route('GET /', function() {
 // page1 route
 $f3->route('GET|POST /page1', function($f3) {
 
+
     // If the form has been submitted
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
-        //var_dump($_POST); // testing purposes
-        // { ["ftname"]=> string(6) "Artem " ["lname"]=> string(6) "Vityuk"
-        // ["age"]=> string(2) "24" ["gender"]=> string(4) "male"
-        // ["phone"]=> string(7) "hmmm206" }
 
-        // Validate data here
-        // 4/29 Zoom recording
-        // if ............ { }
+        # validating first and last name
+        if (!empty($_POST['fname'])) {
+            # if the user entered something, test if its a valid entry
+            if (validFName($_POST['fname'])) {
+
+            }
+        }
+
+
+
+        if (!empty($_POST['fname']) && !empty($_POST['lname'])) {
+            if (validName($_POST['fname'], $_POST['lname'])) {
+                $f3->set("fname", $_SESSION['fname']);
+                $f3->set("lname", $_SESSION['lname']);
+            }
+
+        }
+        else {
+            $f3->set("errors['']", "First name is required");
+            $f3->set("errors['lname']", "Last name is required");
+        }
+
+        # validate age
+        if (!empty($_POST['age'])) {
+            if (validAge($_POST['age'])) {
+                $f3->set("age", $_SESSION['age']);
+            }
+        }
+        else {
+            $f3->set("errors['age']", "Age is required");
+        }
+
+            /*
+            // store data in the session array
+            $_SESSION['fname'] = $_POST['fname'];
+            $_SESSION['lname'] = $_POST['lname'];
+            $_SESSION['age'] = $_POST['age'];
+            $_SESSION['gender'] = $_POST['gender'];
+            $_SESSION['phone'] = $_POST['phone'];
+            // route to the next page (page2)
+            $f3-> reroute('page2');
+            */
+
+
 
         // else (Data is valid) {
-            // store data in the session array
-                $_SESSION['fname'] = $_POST['fname'];
-                $_SESSION['lname'] = $_POST['lname'];
-                $_SESSION['age'] = $_POST['age'];
-                $_SESSION['gender'] = $_POST['gender'];
-                $_SESSION['phone'] = $_POST['phone'];
-                // Reroute to summary to test
-                //$f3-> reroute('summary');
 
-        // route to the next page (page2)
-            $f3-> reroute('page2');
+
+
         // }
 
 
