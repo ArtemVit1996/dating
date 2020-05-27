@@ -36,8 +36,8 @@
                 <p class="profile">State: {{ @SESSION.loc }}</p>
                 <p class="profile">Seeking: {{ @SESSION.seeking }}</p>
             </div>
-            <check if="{{ isset(@SESSION.activities) }}">
-                <p class="profile text-left">Interests:  {{ implode(@SESSION.activities, ", ") }}</p>
+            <check if="{{ isset(@SESSION.outdoor) }}">
+                <p class="profile text-left">Interests:  {{ implode(@SESSION.outdoor, ", ") }}</p>
             </check>
             <button class="btn btn-primary button">Contact me</button>
 

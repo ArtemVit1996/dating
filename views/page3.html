@@ -66,11 +66,26 @@
                 </div>
 
                 <h3 class="activity">Out-door activities</h3>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label norm" for="a7">
-                        <input type="checkbox" id="a7" name="a7" value="Hiking">Hiking
-                    </label>
-                </div>
+                <repeat group="{{ @outdoor }}" value="{{ @value }}">
+
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label norm">
+                            <check if="{{  in_array(@value, @SESSION.outdoor) }}">
+                                <true>
+                                    <input type="checkbox" name="outdoor[]" value="{{ @value }}" checked> {{ @value }}
+                                </true>
+                                <false>
+                                    <input type="checkbox" name="outdoor[]" value="{{ @value }}"> {{ @value }}
+                                </false>
+                            </check>
+
+                        </label>
+                    </div>
+
+                </repeat>
+                <small>{{ @errors['outdoor'] }}</small><br>
+
+                <!--
                 <div class="form-check form-check-inline">
                     <label class="form-check-label norm" for="a8">
                         <input type="checkbox" id="a8" name="a8" value="Biking">Biking
@@ -96,6 +111,7 @@
                         <input type="checkbox" id="a12" name="a12" value="Roadtrips"> Road trips
                     </label>
                 </div>
+                -->
 
                 <button class="btn btn-dark button">Next></button>
 

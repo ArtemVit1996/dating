@@ -32,62 +32,35 @@ $f3->route('GET /', function() {
 // page1 route
 $f3->route('GET|POST /page1', function($f3) {
 
-
     // If the form has been submitted
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        # validating first and last name
-        if (!empty($_POST['fname'])) {
-            # if the user entered something, test if its a valid entry
-            if (validFName($_POST['fname'])) {
-
-            }
+        $isValid = true;
+        if (!validFName($_POST['fname'], $f3)) {
+            $isValid = false;
+        }
+        if (!validLName($_POST['lname'], $f3)) {
+            $isValid = false;
+        }
+        if (!validAge($_POST['age'], $f3)) {
+            $isValid = false;
+        }
+        if (!validPhone($_POST['phone'], $f3)) {
+            $isValid = false;
         }
 
-
-
-        if (!empty($_POST['fname']) && !empty($_POST['lname'])) {
-            if (validName($_POST['fname'], $_POST['lname'])) {
-                $f3->set("fname", $_SESSION['fname']);
-                $f3->set("lname", $_SESSION['lname']);
-            }
-
-        }
-        else {
-            $f3->set("errors['']", "First name is required");
-            $f3->set("errors['lname']", "Last name is required");
-        }
-
-        # validate age
-        if (!empty($_POST['age'])) {
-            if (validAge($_POST['age'])) {
-                $f3->set("age", $_SESSION['age']);
-            }
-        }
-        else {
-            $f3->set("errors['age']", "Age is required");
-        }
-
-            /*
-            // store data in the session array
-            $_SESSION['fname'] = $_POST['fname'];
-            $_SESSION['lname'] = $_POST['lname'];
-            $_SESSION['age'] = $_POST['age'];
+        if ($isValid) {
+            # store the gender in the session array
             $_SESSION['gender'] = $_POST['gender'];
-            $_SESSION['phone'] = $_POST['phone'];
-            // route to the next page (page2)
+            # route to the next page (page2)
             $f3-> reroute('page2');
-            */
+        }
 
-
-
-        // else (Data is valid) {
-
-
-
-        // }
-
-
+        # Pass the data to the validate functions
+        // validFName($_POST['fname'], $f3);
+        //validLName($_POST['lname'], $f3);
+        //validAge($_POST['age'], $f3);
+        //validPhone($_POST['phone'], $f3);
     }
 
     $view = new Template();
@@ -99,30 +72,22 @@ $f3->route('GET|POST /page2', function($f3) {
 
     // If the form has been submitted
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
-        var_dump($_POST); // testing purposes
-        // { ["ftname"]=> string(6) "Artem " ["lname"]=> string(6) "Vityuk"
-        // ["age"]=> string(2) "24" ["gender"]=> string(4) "male"
-        // ["phone"]=> string(7) "hmmm206" }
 
-        // Validate data here
-        // 4/29 Zoom recording
-        // if ............ { }
+        $isValid = true;
+        if (!validEmail($_POST['email'], $f3)) {
+            $isValid = false;
+        }
 
-        // else (Data is valid) {
-        // store data in the session array
-        $_SESSION['email'] = $_POST['email'];
-        $_SESSION['loc'] = $_POST['loc'];
-        $_SESSION['seeking'] = $_POST['gender'];
-        $_SESSION['bio'] = $_POST['bio'];
-        // Reroute to summary to test
-        //$f3->reroute('summary');
-
-        // route to the next page (page2)
-        $f3-> reroute('page3');
-        // }
+        if ($isValid) {
+            # store the inputs is the session array
+            $_SESSION['email'] = $_POST['email'];
+            $_SESSION['loc'] = $_POST['loc'];
+            $_SESSION['seeking'] = $_POST['gender'];
+            $_SESSION['bio'] = $_POST['bio'];
+            # route to the next page (page2)
+            $f3-> reroute('page3');
+        }
     }
-
-
     $view = new Template();
     echo $view->render('views/page2.html');
 });
@@ -130,45 +95,35 @@ $f3->route('GET|POST /page2', function($f3) {
 // page3(interests) route
 $f3->route('GET|POST /page3', function($f3) {
 
+    # array if valid outdoor activities
+    $outdoor = array('Hiking', 'Biking', 'Snowboarding', 'Skiing',
+        'Running', 'Roadtrips');
+    # set an f3 outdoor array
+    $f3->set('outdoor', $outdoor);
+
+    # array of valid indoor activities
+    $indoor = array('Game night', 'Movie night', 'Baking/cooking',
+        'Video games', 'Writing', 'Reading');
+    # set an f3 indoor array
+    $f3->set('indoor', $indoor);
+
     // If the form has been submitted
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
-        //var_dump($_POST); // testing purposes
-        // { ["ftname"]=> string(6) "Artem " ["lname"]=> string(6) "Vityuk"
-        // ["age"]=> string(2) "24" ["gender"]=> string(4) "male"
-        // ["phone"]=> string(7) "hmmm206" }
 
-        // Validate data here
-        // 4/29 Zoom recording
-        // if ............ { }
+        $isValid = true;
 
-        // else (Data is valid) {
-        // store data in the session array
-        /*
-        $_SESSION['activity1'] = $_POST['in1'];
-        $_SESSION['activity2'] = $_POST['in2'];
-        $_SESSION['activity3'] = $_POST['in3'];
-        $_SESSION['activity4'] = $_POST['in4'];
-        */
-
-        // define a session array
-        if (!isset($_SESSION['activities'])){
-            $_SESSION['activities'] = array();
+        if (!validOutdoor($_POST['outdoor'], $f3, $outdoor)) {
+            $isValid = false;
         }
 
-        $count = 1;
-        while ($count < 13){
-            if (!empty($_POST['a'.$count])) {
-                array_push($_SESSION['activities'],$_POST['a'.$count]);
-            }
-            $count++;
+        if (!validIndoor($_POST['indoor'], $f3, $indoor)) {
+            $isValid = false;
         }
 
-        foreach ($_SESSION['activities'] as $item){
-            echo $item.'<br>';
+        if ($isValid) {
+            // route to the summary page
+            $f3-> reroute('summary');
         }
-        // route to the summary page
-        $f3-> reroute('summary');
-
 
     }
 

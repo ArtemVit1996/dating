@@ -31,7 +31,8 @@
             <div class="col">
 
                 <label for="email">Email:</label><br>
-                <input class="form-control" type="text" id="email" name="email" value=""><br>
+                <input class="form-control" type="text" id="email" name="email" value="{{ @email }}">
+                <small>{{ @errors['email'] }}</small><br>
 
                 <label for="loc">Location:</label><br>
                 <input class="form-control" type="text" id="loc" name="loc" value=""><br><br>
