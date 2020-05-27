@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Personal Info</title>
+    <title>Interests</title>
 
     <!-- Links to bootstrap and css files-->
     <link rel="stylesheet"  type="text/css" href="styles/styles.css"/>
@@ -32,8 +32,7 @@
 
             <form action="#" method="post" class="form-group">
 
-                <h3 class="activity">In-door activities</h3>
-
+                <!--
                 <div class="form-check form-check-inline">
                     <label class="form-check-label norm " for="a1">
                         <input type="checkbox" id="a1" name="a1" value="Game night">Game Night
@@ -64,54 +63,65 @@
                         <input type="checkbox" id="a6" name="a6" value="Reading">Reading
                     </label>
                 </div>
+                -->
+                <h3 class="activity">In-door activities</h3>
+                <repeat group="{{ @indoor }}" value="{{ @value }}">
+
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label norm">
+
+                            <check if="{{ isset(@SESSION.indoor) }}">
+                                <true>
+                                    <check if="{{  in_array( @value, @SESSION.indoor) }}">
+                                        <true>
+                                            <input type="checkbox" name="indoor[]" value="{{ @value }}" checked> {{ @value }}
+                                        </true>
+                                        <false>
+                                            <input type="checkbox" name="indoor[]" value="{{ @value }}"> {{ @value }}
+                                        </false>
+                                    </check>
+                                </true>
+                                <false>
+                                    <input type="checkbox" name="indoor[]" value="{{ @value }}"> {{ @value }}
+                                </false>
+
+                            </check>
+
+
+                        </label>
+                    </div>
+
+                </repeat><br>
+                <small>{{ @errors['indoor'] }}</small><br>
 
                 <h3 class="activity">Out-door activities</h3>
                 <repeat group="{{ @outdoor }}" value="{{ @value }}">
 
+
                     <div class="form-check form-check-inline">
                         <label class="form-check-label norm">
-                            <check if="{{  in_array(@value, @SESSION.outdoor) }}">
+                            <check if="{{ isset(@SESSION.outdoor) }}" >
                                 <true>
-                                    <input type="checkbox" name="outdoor[]" value="{{ @value }}" checked> {{ @value }}
+                                    <check if="{{  in_array(@value, @SESSION.outdoor) }}">
+                                        <true>
+                                            <input type="checkbox" name="outdoor[]" value="{{ @value }}" checked> {{ @value }}
+                                        </true>
+                                        <false>
+                                            <input type="checkbox" name="outdoor[]" value="{{ @value }}"> {{ @value }}
+                                        </false>
+                                    </check>
                                 </true>
                                 <false>
                                     <input type="checkbox" name="outdoor[]" value="{{ @value }}"> {{ @value }}
                                 </false>
                             </check>
 
+
                         </label>
                     </div>
 
-                </repeat>
+                </repeat><br>
                 <small>{{ @errors['outdoor'] }}</small><br>
-
-                <!--
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label norm" for="a8">
-                        <input type="checkbox" id="a8" name="a8" value="Biking">Biking
-                    </label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label norm" for="a9">
-                        <input type="checkbox" id="a9" name="a9" value="Snowboarding">Snowboarding
-                    </label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label norm" for="a10">
-                        <input type="checkbox" id="a10" name="a10" value="Skiing">Skiing
-                    </label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label norm" for="a11">
-                        <input type="checkbox" id="a11" name="a11" value="Running">Running
-                    </label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label norm" for="a12">
-                        <input type="checkbox" id="a12" name="a12" value="Roadtrips"> Road trips
-                    </label>
-                </div>
-                -->
 
                 <button class="btn btn-dark button">Next></button>
 

@@ -102,26 +102,44 @@ function validOutdoor($outArray, $f3, $array) {
     $isValid = true;
 
     $_SESSION['outdoor'] = array();
-    foreach ($outArray as $item) {
-        if (in_array($item , $array)) {
-            # set a session variable to the input
-            array_push( $_SESSION['outdoor'], $item);
-            # set a f3 variable to the input
-            // $f3->set("outdoor", $option);
-        }
-        else {
-            $f3->set("errors['outdoor']", "Not a valid option");
-            $isValid = false;
-        }
+    if (isset($outArray)) {
+        foreach ($outArray as $item) {
+            if (in_array($item , $array)) {
+                # set a session variable to the input
+                array_push( $_SESSION['outdoor'], $item);
+                # set a f3 variable to the input
+                // $f3->set("outdoor", $option);
+            }
+            else {
+                $f3->set("errors['outdoor']", "Not a valid option");
+                $isValid = false;
+            }
 
+        }
     }
-    return $isValid;
 
-    // see if selected is in that array
+    return $isValid;
 }
 
 // function to validate indoor options
-function validIndoor() {
-    // make array of valid options
-    // see if selected is in that array
+function validIndoor($inArray, $f3, $array) {
+    $isValid = true;
+
+    $_SESSION['indoor'] = array();
+    if (isset($inArray)) {
+        foreach ($inArray as $item) {
+            if (in_array($item , $array)) {
+                # set a session variable to the input
+                array_push( $_SESSION['indoor'], $item);
+                # set a f3 variable to the input
+                // $f3->set("outdoor", $option);
+            }
+            else {
+                $f3->set("errors['indoor']", "Not a valid option");
+                $isValid = false;
+            }
+
+        }
+    }
+    return $isValid;
 }

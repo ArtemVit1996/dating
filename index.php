@@ -10,13 +10,15 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-// start a session
-session_start();
+
 
 // Require the autoload file
 require_once("vendor/autoload.php");
 // require the validation file
 require ("model/validation.php");
+
+// start a session
+session_start();
 
 // Instantiate the F3 Base class
 $f3 = Base::instance();
@@ -35,6 +37,9 @@ $f3->route('GET|POST /page1', function($f3) {
     // If the form has been submitted
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+        # store the gender in the session array
+        $_SESSION['gender'] = $_POST['gender'];
+
         $isValid = true;
         if (!validFName($_POST['fname'], $f3)) {
             $isValid = false;
@@ -50,8 +55,6 @@ $f3->route('GET|POST /page1', function($f3) {
         }
 
         if ($isValid) {
-            # store the gender in the session array
-            $_SESSION['gender'] = $_POST['gender'];
             # route to the next page (page2)
             $f3-> reroute('page2');
         }
@@ -73,17 +76,21 @@ $f3->route('GET|POST /page2', function($f3) {
     // If the form has been submitted
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+        # Store not required fields in the session
+        $_SESSION['email'] = $_POST['email'];
+        $_SESSION['loc'] = $_POST['loc'];
+        $_SESSION['seeking'] = $_POST['gender'];
+        $_SESSION['bio'] = $_POST['bio'];
+        # Set f3 variables to session variables to make items sticky
+        $f3->set("loc", $_SESSION['loc']);
+        $f3->set("bio", $_SESSION['bio']);
+
         $isValid = true;
         if (!validEmail($_POST['email'], $f3)) {
             $isValid = false;
         }
 
         if ($isValid) {
-            # store the inputs is the session array
-            $_SESSION['email'] = $_POST['email'];
-            $_SESSION['loc'] = $_POST['loc'];
-            $_SESSION['seeking'] = $_POST['gender'];
-            $_SESSION['bio'] = $_POST['bio'];
             # route to the next page (page2)
             $f3-> reroute('page3');
         }
@@ -101,17 +108,20 @@ $f3->route('GET|POST /page3', function($f3) {
     # set an f3 outdoor array
     $f3->set('outdoor', $outdoor);
 
+
     # array of valid indoor activities
     $indoor = array('Game night', 'Movie night', 'Baking/cooking',
         'Video games', 'Writing', 'Reading');
     # set an f3 indoor array
     $f3->set('indoor', $indoor);
+    //echo var_dump($indoor);
 
     // If the form has been submitted
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+        var_dump($_POST['outdoor']);
         $isValid = true;
-
+//
         if (!validOutdoor($_POST['outdoor'], $f3, $outdoor)) {
             $isValid = false;
         }
@@ -135,6 +145,7 @@ $f3->route('GET|POST /page3', function($f3) {
 $f3->route('GET /summary', function() {
 
     // echo "<h1>Thank you !</h1>";
+
 
     $view = new Template();
     echo $view->render('views/summary.html');

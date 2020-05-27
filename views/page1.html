@@ -43,7 +43,15 @@
                 <label>Gender:</label><br>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label norm">
-                        <input class="form-check-input" type="radio" id="male" name="gender" value="male">Male
+                        <check if="@SESSION.gender == 'male' ">
+                            <true>
+                                <input class="form-check-input" type="radio" id="male" name="gender" value="male" checked>Male
+                            </true>
+                            <false>
+                                <input class="form-check-input" type="radio" id="male" name="gender" value="male">Male
+                            </false>
+                        </check>
+
                     </label>
                 </div>
 

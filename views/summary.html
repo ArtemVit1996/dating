@@ -36,8 +36,20 @@
                 <p class="profile">State: {{ @SESSION.loc }}</p>
                 <p class="profile">Seeking: {{ @SESSION.seeking }}</p>
             </div>
-            <check if="{{ isset(@SESSION.outdoor) }}">
-                <p class="profile text-left">Interests:  {{ implode(@SESSION.outdoor, ", ") }}</p>
+            <check if="{{ isset(@SESSION.outdoor) || isset(@SESSION.indoor)}}">
+                <p class="profile text-left">Interests:
+                    <check if="{{ isset(@SESSION.outdoor) }}">
+                        {{ implode(@SESSION.outdoor, ", ") }}
+                    </check>
+
+                    <check if="{{ isset(@SESSION.outdoor) && isset(@SESSION.indoor) }}">
+                        ,
+                    </check>
+
+                    <check if="{{ isset(@SESSION.indoor) }}">
+                         {{ implode(@SESSION.indoor, ", ") }}
+                    </check>
+                </p>
             </check>
             <button class="btn btn-primary button">Contact me</button>
 
