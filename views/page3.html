@@ -91,8 +91,8 @@
                         </label>
                     </div>
 
-                </repeat><br>
-                <small>{{ @errors['indoor'] }}</small><br>
+                </repeat><br><br>
+                <small class="bg-warning">{{ @errors['indoor'] }}</small><br>
 
                 <h3 class="activity">Out-door activities</h3>
                 <repeat group="{{ @outdoor }}" value="{{ @value }}">
@@ -120,8 +120,8 @@
                         </label>
                     </div>
 
-                </repeat><br>
-                <small>{{ @errors['outdoor'] }}</small><br>
+                </repeat><br><br>
+                <small class="bg-warning">{{ @errors['outdoor'] }}</small><br>
 
                 <button class="btn btn-dark button">Next></button>
 

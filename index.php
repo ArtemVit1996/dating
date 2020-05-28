@@ -118,7 +118,6 @@ $f3->route('GET|POST /page3', function($f3) {
     // If the form has been submitted
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        var_dump($_POST['outdoor']);
         $isValid = true;
 //
         if (!validOutdoor($_POST['outdoor'], $f3, $outdoor)) {
