@@ -10,8 +10,6 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-
-
 // Require the autoload file
 require_once("vendor/autoload.php");
 // require the validation file
@@ -84,6 +82,7 @@ $f3->route('GET|POST /page2', function($f3) {
         # Set f3 variables to session variables to make items sticky
         $f3->set("loc", $_SESSION['loc']);
         $f3->set("bio", $_SESSION['bio']);
+        $f3->set("seeking",$_SESSION["seeking"]);
 
         $isValid = true;
         if (!validEmail($_POST['email'], $f3)) {

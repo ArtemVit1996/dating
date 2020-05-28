@@ -39,14 +39,25 @@
 
                 <label class="">Seeking:</label><br>
                 <div class="form-check form-check-inline">
-                    <label class="form-check-label norm " for="male">
-                        <input class="radio-inline" type="radio" id="male" name="gender" value="male">Male
+                    <label class="form-check-label norm ">
+                        <check if="@SESSION.seeking == 'male' ">
+                            <true>
+                                <input class="radio-inline" type="radio" name="gender" value="male" checked>Male                            </true>
+                            <false>
+                                <input class="radio-inline" type="radio" name="gender" value="male">Male                            </false>
+                        </check>
+
                     </label>
                 </div>
 
                 <div class="form-check form-check-inline">
-                    <label class="form-check-label norm" for="female">
-                        <input type="radio" id="female" name="gender" value="female">Female
+                    <label class="form-check-label norm" >
+                        <check if="@SESSION.seeking == 'female' ">
+                            <true>
+                                <input type="radio" name="gender" value="female" checked>Female
+                            <false>
+                                <input type="radio" name="gender" value="female">Female
+                        </check>
                     </label>
                 </div>
 
