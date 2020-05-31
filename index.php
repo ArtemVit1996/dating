@@ -15,7 +15,7 @@ require_once("vendor/autoload.php");
 // require the validation file
 require ("model/validation.php");
 
-// start a session
+// start a session (must be after the autoload file)
 session_start();
 
 // Instantiate the F3 Base class
