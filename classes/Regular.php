@@ -46,9 +46,16 @@ class Regular
      */
     public function __toString()
     {
-        $string = $this->_fname . ", ";
-        $string .= $this->_lname . ", ";
-        $string .= $this->_age;
+        $string = "fname: " . $this->_fname ."<br>";
+        $string .= "lname: ". $this->_lname . "<br>";
+        $string .= "age: " . $this->_age . "<br>";
+        $string .= "gender: " . $this->_gender . "<br>";
+        $string .= "phone: " . $this->_phone . "<br>";
+        $string .= "email: " . $this->_email . "<br>";
+        $string .= "location: " . $this->_state . "<br>";
+        $string .= "seeking: " . $this->_seeking . "<br>";
+        $string .= "bio: " . $this->_bio . "<br>";
+
         return $string;
     }
 

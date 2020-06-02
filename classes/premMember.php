@@ -10,18 +10,20 @@ class Premium extends Regular
                                 $state = "", $seeking = "", $bio = "",$indoor = array(), $outdoor = array())
     {
         parent::__construct($fname, $lname, $age, $gender, $phone, $email, $state, $seeking, $bio);
-        $this->setIndoor($indoor);
-        $this->setOutdoor($outdoor);
+        $this->_indoorInterests = $indoor;
+        $this->_outdoorInterests = $outdoor;
     }
 
     // Setters
     public function setIndoor($indoor)
     {
-        $this->_indoorInterests = $indoor;
+        array_push($this->_indoorInterests, $indoor);
+        //$this->_indoorInterests = $indoor;
     }
     public function setOutdoor($outdoor)
     {
-        $this->_outdoorInterests = $outdoor;
+        array_push($this->_outdoorInterests, $outdoor);
+        //$this->_outdoorInterests = $outdoor;
     }
 
     // Getters

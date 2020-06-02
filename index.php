@@ -40,10 +40,12 @@ $f3->route('GET|POST /page1', function($f3) {
         # Check if user has opted out for premium membership
         if (!empty($_POST['membership'])) {
             $member = new Premium();
+            echo "premium";
 
         }
         else {
             $member = new Regular();
+            echo "regular <br>";
         }
 
 
@@ -61,16 +63,21 @@ $f3->route('GET|POST /page1', function($f3) {
             $isValid = false;
         }
 
+        if(isset($_POST['gender'])) {
+            $f3->set("gender", $_POST['gender']);
+        }
+
         if ($isValid) {
+            # store all the valid fields in the member
+            $member->setFname($_POST['fname']);
+            $member->setLname($_POST['lname']);
+            $member->setAge($_POST['age']);
+            $member->setPhone($_POST['phone']);
+            $member->setGender($_POST['gender']);
             # put the member into a session
             $_SESSION['member'] = $member;
-            $theMember = $_SESSION['member'];
-            # store all the valid fields in the member
-            $theMember->setFname($_POST['fname']);
-            $theMember->setLname($_POST['lname']);
-            $theMember->setAge($_POST['age']);
-            $theMember->setPhone($_POST['phone']);
-            $theMember->setGender($_POST['gender']);
+            //echo $_SESSION['member'];
+            //var_dump($_SESSION);
             # route to the next page (page2)
             $f3-> reroute('page2');
         }
@@ -110,9 +117,26 @@ $f3->route('GET|POST /page2', function($f3) {
             $theMember->setState($_POST['loc']);
             $theMember->setSeeking($_POST['gender']);
             $theMember->setBio($_POST['bio']);
-            // print_r($theMember);
-            # route to the next page (page2)
-            $f3-> reroute('page3');
+
+            // check to see if the class is Premium or Regular //method_exists ($theMember , 'setIndoor'
+            if ($theMember instanceof Premium) {
+                // **** Premium ******
+
+                // route to Interest page
+                $f3-> reroute('page3');
+                //echo $theMember;
+                //echo "im premium";
+            }
+            else {
+                // **** Regular ****
+
+                // route to the summary page
+                $f3-> reroute('summary');
+                //echo $theMember;
+                //echo "im regular";
+            }
+
+
         }
     }
     $view = new Template();
@@ -123,15 +147,6 @@ $f3->route('GET|POST /page2', function($f3) {
 $f3->route('GET|POST /page3', function($f3) {
     // grab the member class stored in a session
     $theMember = $_SESSION['member'];
-
-    // check to see if the class is Premium or Regular
-    if (method_exists ($theMember , 'setIndoor')) {
-        echo " found method";
-    }
-    else {
-        echo "no method";
-    }
-
 
     # array if valid outdoor activities
     $outdoor = array('Hiking', 'Biking', 'Snowboarding', 'Skiing',
@@ -151,12 +166,12 @@ $f3->route('GET|POST /page3', function($f3) {
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $isValid = true;
-//
-        if (!validOutdoor($_POST['outdoor'], $f3, $outdoor)) {
+
+        if (!validOutdoor($_POST['outdoor'], $f3, $outdoor, $theMember)) {
             $isValid = false;
         }
 
-        if (!validIndoor($_POST['indoor'], $f3, $indoor)) {
+        if (!validIndoor($_POST['indoor'], $f3, $indoor, $theMember)) {
             $isValid = false;
         }
 
@@ -174,8 +189,7 @@ $f3->route('GET|POST /page3', function($f3) {
 // summary route
 $f3->route('GET /summary', function() {
 
-    // echo "<h1>Thank you !</h1>";
-
+    //session_destroy();
 
     $view = new Template();
     echo $view->render('views/summary.html');

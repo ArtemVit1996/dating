@@ -5,7 +5,7 @@ function validFName($fname, $f3) {
         # fname in not empty so check if its all alphabetic
         if (ctype_alpha($fname)) {
             # set a session variable to the input
-            $_SESSION['fname'] = $fname;
+            //$_SESSION['fname'] = $fname;
             # set a f3 variable to the input
             $f3->set("fname", $fname);
             return true;
@@ -25,7 +25,7 @@ function validLName($lname, $f3) {
         # lname in not empty so check if its all alphabetic
         if (ctype_alpha($lname)) {
             # set a session variable to the input
-            $_SESSION['lname'] = $lname;
+            //$_SESSION['lname'] = $lname;
             # set a f3 variable to the input
             $f3->set("lname", $lname);
             return true;
@@ -46,7 +46,7 @@ function validAge($age, $f3) {
         # check if age is in range(18-118)
         if (($age >= 18) && ($age <= 118)) {
             # set a session variable to the input
-            $_SESSION['age'] = $age;
+            //$_SESSION['age'] = $age;
             # set a f3 variable to the input
             $f3->set("age", $age);
             return true;
@@ -66,7 +66,7 @@ function validPhone($num, $f3) {
     if (!empty($num)) {
         if (preg_match("/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/", $num)) {
             # set a session variable to the input
-            $_SESSION['phone'] = $num;
+            //$_SESSION['phone'] = $num;
             # set a f3 variable to the input
             $f3->set("phone", $num);
             return true;
@@ -86,7 +86,7 @@ function validEmail($email, $f3) {
     # if entered email matches the right format
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
         # set a session variable to the input
-        $_SESSION['email'] = $email;
+        //$_SESSION['email'] = $email;
         # set a f3 variable to the input
         $f3->set("email", $email);
         return true;
@@ -98,7 +98,7 @@ function validEmail($email, $f3) {
 }
 
 // function to validate outdoor options
-function validOutdoor($outArray, $f3, $array) {
+function validOutdoor($outArray, $f3, $array, $obj) {
     $isValid = true;
 
     $_SESSION['outdoor'] = array();
@@ -106,9 +106,9 @@ function validOutdoor($outArray, $f3, $array) {
         foreach ($outArray as $item) {
             if (in_array($item , $array)) {
                 # set a session variable to the input
-                array_push( $_SESSION['outdoor'], $item);
-                # set a f3 variable to the input
-                // $f3->set("outdoor", $option);
+                //array_push( $_SESSION['outdoor'], $item);
+                # pass the item to the member class
+                $obj->setOutdoor($item);
             }
             else {
                 $f3->set("errors['outdoor']", "Not a valid option");
@@ -122,7 +122,7 @@ function validOutdoor($outArray, $f3, $array) {
 }
 
 // function to validate indoor options
-function validIndoor($inArray, $f3, $array) {
+function validIndoor($inArray, $f3, $array, $obj) {
     $isValid = true;
 
     $_SESSION['indoor'] = array();
@@ -130,9 +130,9 @@ function validIndoor($inArray, $f3, $array) {
         foreach ($inArray as $item) {
             if (in_array($item , $array)) {
                 # set a session variable to the input
-                array_push( $_SESSION['indoor'], $item);
-                # set a f3 variable to the input
-                // $f3->set("outdoor", $option);
+                //array_push( $_SESSION['indoor'], $item);
+                # pass the item to the member class
+                $obj->setIndoor($item);
             }
             else {
                 $f3->set("errors['indoor']", "Not a valid option");

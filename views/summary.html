@@ -28,26 +28,27 @@
 
             <h1 class="header">Your profile</h1><hr>
             <div class="text-left">
-                <p class="profile">Name: {{ @SESSION.fname }} {{@SESSION.lname}}</p>
-                <p class="profile">Gender: {{ @SESSION.gender }}</p>
-                <p class="profile">Age: {{ @SESSION.age }}</p>
-                <p class="profile">Phone: {{ @SESSION.phone }}</p>
-                <p class="profile">Email: {{ @SESSION.email }}</p>
-                <p class="profile">State: {{ @SESSION.loc }}</p>
-                <p class="profile">Seeking: {{ @SESSION.seeking }}</p>
+                <p class="profile">Name: {{ @SESSION.member->getFname() }} {{@SESSION.member->getLname() }}</p>
+                <p class="profile">Gender: {{ @SESSION.member->getGender() }}</p>
+                <p class="profile">Age: {{ @SESSION.member->getAge() }}</p>
+                <p class="profile">Phone: {{ @SESSION.member->getPhone() }}</p>
+                <p class="profile">Email: {{ @SESSION.member->getEmail() }}</p>
+                <p class="profile">State: {{ @SESSION.member->getState() }}</p>
+                <p class="profile">Seeking: {{ @SESSION.member->getSeeking() }}</p>
             </div>
-            <check if="{{ isset(@SESSION.outdoor) || isset(@SESSION.indoor)}}">
+            {{ print_r(@SESSION.member->getIndoor()) }}
+            <check if="{{ !empty(@SESSION.member->getIndoor()) || !empty(@SESSION.member->getOutdoor())}}">
                 <p class="profile text-left">Interests:
-                    <check if="{{ isset(@SESSION.outdoor) }}">
-                        {{ implode(@SESSION.outdoor, ", ") }}
+                    <check if="{{ !empty(@SESSION.member->getIndoor()) }}">
+                        {{ implode(", ", @SESSION.member->getIndoor()) }}
                     </check>
 
-                    <check if="{{ isset(@SESSION.outdoor) && isset(@SESSION.indoor) }}">
-                        ,
+                    <check if="{{ !empty(@SESSION.member->getIndoor()) || !empty(@SESSION.member->getOutdoor()) }}">
+                        , PASSED2
                     </check>
 
-                    <check if="{{ isset(@SESSION.indoor) }}">
-                         {{ implode(@SESSION.indoor, ", ") }}
+                    <check if="{{ !empty(@SESSION.member->getOutdoor()) }}">
+                         {{ implode(", ", @SESSION.member->getOutdoor()) }}
                     </check>
                 </p>
             </check>
@@ -60,7 +61,7 @@
         <!-- div containing the image bootstrap styled-->
         <div class="col">
             <img class="img-fluid rounded" src="images/profile.png" alt="couple">
-            <p>Biography<br> {{ @SESSION.bio }}</p>
+            <p>Biography<br> {{ @SESSION.member->getBio() }}</p>
         </div>
 
     </div>
