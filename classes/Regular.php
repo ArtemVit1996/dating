@@ -1,6 +1,6 @@
 <?php
 
-class Member
+class Regular
 {
     // Instance variables
     private $_fname;
@@ -44,7 +44,7 @@ class Member
      * of a member object
      * @return string
      */
-    public function toString()
+    public function __toString()
     {
         $string = $this->_fname . ", ";
         $string .= $this->_lname . ", ";
@@ -91,31 +91,40 @@ class Member
     }
 
     // ********** Getters *********
-    public function getFname() {
+    public function getFname()
+    {
         return $this->_fname;
     }
-    public function getLname() {
+    public function getLname()
+    {
         return $this->_lname;
     }
-    public function getAge() {
+    public function getAge()
+    {
         return $this->_age;
     }
-    public function getGender() {
+    public function getGender()
+    {
         return $this->_gender;
     }
-    public function getPhone() {
+    public function getPhone()
+    {
         return $this->_phone;
     }
-    public function getEmail() {
+    public function getEmail()
+    {
         return $this->_email;
     }
-    public function getState() {
+    public function getState()
+    {
         return $this->_state;
     }
-    public function getSeeking() {
+    public function getSeeking()
+    {
         return $this->_seeking;
     }
-    public function getBio() {
+    public function getBio()
+    {
         return $this->_bio;
     }
 
@@ -126,9 +135,9 @@ class Member
 }
 
 // testing the class
-//$member = new Member("artem", "vit");
+//$member = new Regular("artem", "vit");
 //echo $member->toString();
-$member2 = new Member("artem", "vit");
-$member2->setGender("Maaan");
-$member2->setAge(44);
-echo $member2->toString();
+//$member2 = new Regular("artem", "vit");
+//$member2->setGender("Maaan");
+//$member2->setAge(44);
+//echo $member2->toString();

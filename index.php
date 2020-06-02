@@ -13,10 +13,12 @@ error_reporting(E_ALL);
 // Require the autoload file
 require_once("vendor/autoload.php");
 // require the validation file
-require ("model/validation.php");
+require_once("model/validation.php");
+//require_once("classes/Regular.php");
 
 // start a session (must be after the autoload file)
 session_start();
+
 
 // Instantiate the F3 Base class
 $f3 = Base::instance();
@@ -35,8 +37,15 @@ $f3->route('GET|POST /page1', function($f3) {
     // If the form has been submitted
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        # store the gender in the session array
-        $_SESSION['gender'] = $_POST['gender'];
+        # Check if user has opted out for premium membership
+        if (!empty($_POST['membership'])) {
+            $member = new Premium();
+
+        }
+        else {
+            $member = new Regular();
+        }
+
 
         $isValid = true;
         if (!validFName($_POST['fname'], $f3)) {
@@ -53,15 +62,18 @@ $f3->route('GET|POST /page1', function($f3) {
         }
 
         if ($isValid) {
+            # put the member into a session
+            $_SESSION['member'] = $member;
+            $theMember = $_SESSION['member'];
+            # store all the valid fields in the member
+            $theMember->setFname($_POST['fname']);
+            $theMember->setLname($_POST['lname']);
+            $theMember->setAge($_POST['age']);
+            $theMember->setPhone($_POST['phone']);
+            $theMember->setGender($_POST['gender']);
             # route to the next page (page2)
             $f3-> reroute('page2');
         }
-
-        # Pass the data to the validate functions
-        // validFName($_POST['fname'], $f3);
-        //validLName($_POST['lname'], $f3);
-        //validAge($_POST['age'], $f3);
-        //validPhone($_POST['phone'], $f3);
     }
 
     $view = new Template();
@@ -70,19 +82,21 @@ $f3->route('GET|POST /page1', function($f3) {
 
 // page2(profile) route
 $f3->route('GET|POST /page2', function($f3) {
+    //echo $_SESSION['member']->toString();
 
     // If the form has been submitted
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         # Store not required fields in the session
-        $_SESSION['email'] = $_POST['email'];
-        $_SESSION['loc'] = $_POST['loc'];
-        $_SESSION['seeking'] = $_POST['gender'];
-        $_SESSION['bio'] = $_POST['bio'];
+        //$_SESSION['email'] = $_POST['email'];
+        //$_SESSION['loc'] = $_POST['loc'];
+        //$_SESSION['seeking'] = $_POST['gender'];
+        //$_SESSION['bio'] = $_POST['bio'];
+
         # Set f3 variables to session variables to make items sticky
-        $f3->set("loc", $_SESSION['loc']);
-        $f3->set("bio", $_SESSION['bio']);
-        $f3->set("seeking",$_SESSION["seeking"]);
+        $f3->set("loc", $_POST['loc']);
+        $f3->set("bio", $_POST['bio']);
+        $f3->set("seeking",$_POST['gender']);
 
         $isValid = true;
         if (!validEmail($_POST['email'], $f3)) {
@@ -90,6 +104,13 @@ $f3->route('GET|POST /page2', function($f3) {
         }
 
         if ($isValid) {
+            # set the user inputs into the member class(located in the session)
+            $theMember = $_SESSION['member'];
+            $theMember->setEmail($_POST['email']);
+            $theMember->setState($_POST['loc']);
+            $theMember->setSeeking($_POST['gender']);
+            $theMember->setBio($_POST['bio']);
+            // print_r($theMember);
             # route to the next page (page2)
             $f3-> reroute('page3');
         }
@@ -100,6 +121,17 @@ $f3->route('GET|POST /page2', function($f3) {
 
 // page3(interests) route
 $f3->route('GET|POST /page3', function($f3) {
+    // grab the member class stored in a session
+    $theMember = $_SESSION['member'];
+
+    // check to see if the class is Premium or Regular
+    if (method_exists ($theMember , 'setIndoor')) {
+        echo " found method";
+    }
+    else {
+        echo "no method";
+    }
+
 
     # array if valid outdoor activities
     $outdoor = array('Hiking', 'Biking', 'Snowboarding', 'Skiing',
