@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Class Regular
+ * Gets generated when a user does not choose a premium account
+ */
 class Regular
 {
     // Instance variables
@@ -60,91 +64,170 @@ class Regular
     }
 
     // ******** Setters **********
+
+    /**
+     * Setter for the fname
+     * @param $fname
+     */
     public function setFname($fname)
     {
         $this->_fname = $fname;
     }
+
+    /**
+     * Setter for the lname
+     * @param $lname
+     */
     public function setLname($lname)
     {
         $this->_lname = $lname;
     }
+
+    /**
+     * Setter for the age
+     * @param $age
+     */
     public function setAge($age)
     {
         $this->_age = $age;
     }
+
+    /**
+     * Setter for the gender
+     * @param $gender
+     */
     public function setGender($gender)
     {
         $this->_gender = $gender;
     }
+
+    /**
+     * Setter for the phone
+     * @param $phone
+     */
     public function setPhone($phone)
     {
         $this->_phone = $phone;
     }
+
+    /**
+     * Setter for the email
+     * @param $email
+     */
     public function setEmail($email)
     {
         $this->_email = $email;
     }
+
+    /**
+     * Setter for the state
+     * @param $state
+     */
     public function setState($state)
     {
         $this->_state = $state;
     }
+
+    /**
+     * Setter for the seeking
+     * @param $seeking
+     */
     public function setSeeking($seeking)
     {
         $this->_seeking = $seeking;
     }
+
+    /**
+     * Setter for the bio
+     * @param $bio
+     */
     public function setBio($bio)
     {
         $this->_bio = $bio;
     }
 
     // ********** Getters *********
+
+    /**
+     * Getter for the fname
+     * @return string the fname
+     */
     public function getFname()
     {
         return $this->_fname;
     }
+
+    /**
+     * Getter for the lname
+     * @return string the lname
+     */
     public function getLname()
     {
         return $this->_lname;
     }
+
+    /**
+     * Getter for the the age
+     * @return int the age
+     */
     public function getAge()
     {
         return $this->_age;
     }
+
+    /**
+     * Getter for the gender
+     * @return string the gender
+     */
     public function getGender()
     {
         return $this->_gender;
     }
+
+    /**
+     * Getter for the phone
+     * @return string the phone
+     */
     public function getPhone()
     {
         return $this->_phone;
     }
+
+    /**
+     * Getter for the email
+     * @return string the email
+     */
     public function getEmail()
     {
         return $this->_email;
     }
+
+    /**
+     * Getter for the state
+     * @return string the state
+     */
     public function getState()
     {
         return $this->_state;
     }
+
+    /**
+     * Getter for the seeking
+     * @return string the seeking
+     */
     public function getSeeking()
     {
         return $this->_seeking;
     }
+
+    /**
+     * Getter for the bio
+     * @return string the bio
+     */
     public function getBio()
     {
         return $this->_bio;
     }
 
-
-
-
-
 }
 
-// testing the class
-//$member = new Regular("artem", "vit");
-//echo $member->toString();
-//$member2 = new Regular("artem", "vit");
-//$member2->setGender("Maaan");
-//$member2->setAge(44);
-//echo $member2->toString();

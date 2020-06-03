@@ -9,6 +9,12 @@
 class Validate
 {
     # Function to validate the first name
+    /**
+     * Function to validate the first name
+     * @param $fname string first name
+     * @param $f3 f3 variable
+     * @return bool true if valid
+     */
     function validFName($fname, $f3) {
         if (!empty($fname)) {
             # fname in not empty so check if its all alphabetic
@@ -29,6 +35,13 @@ class Validate
     }
 
 # Function to validate the last name
+
+    /**
+     * Function to validate the last name
+     * @param $lname string the last name
+     * @param $f3 fat-free variable
+     * @return bool true if valid
+     */
     function validLName($lname, $f3) {
         if (!empty($lname)) {
             # lname in not empty so check if its all alphabetic
@@ -49,6 +62,13 @@ class Validate
     }
 
 # Function to validate the age
+
+    /**
+     * Function to validate age
+     * @param $age int the age
+     * @param $f3 fat-free variable
+     * @return bool true if valid
+     */
     function validAge($age, $f3) {
         # check if the input is not empty and numeric
         if (!empty($age) && is_numeric($age)) {
@@ -71,6 +91,13 @@ class Validate
     }
 
 # Function to validate phone
+
+    /**
+     * Function to validate the phone
+     * @param $num int the phone
+     * @param $f3 fat-free variable
+     * @return bool true if valid
+     */
     function validPhone($num, $f3) {
         if (!empty($num)) {
             if (preg_match("/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/", $num)) {
@@ -91,6 +118,13 @@ class Validate
     }
 
 // function to validate the email
+
+    /**
+     * Function to validate the email
+     * @param $email string the email
+     * @param $f3 fat-free variable
+     * @return bool true if valid
+     */
     function validEmail($email, $f3) {
         # if entered email matches the right format
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -107,6 +141,15 @@ class Validate
     }
 
 // function to validate outdoor options
+
+    /**
+     * Function to validate the outdoor interests
+     * @param $outArray array of outdoor interests
+     * @param $f3 fat-free variable
+     * @param $array array of valid options
+     * @param $obj premium of regular class
+     * @return bool true if valid
+     */
     function validOutdoor($outArray, $f3, $array, $obj) {
         $isValid = true;
 
@@ -131,6 +174,15 @@ class Validate
     }
 
 // function to validate indoor options
+
+    /**
+     * Function to validate the outdoor interests
+     * @param $inArray array of indoor interests
+     * @param $f3 fat-free variable
+     * @param $array array of valid options
+     * @param $obj premium of regular class
+     * @return bool true if valid
+     */
     function validIndoor($inArray, $f3, $array, $obj) {
         $isValid = true;
 
