@@ -36,22 +36,26 @@
                 <p class="profile">State: {{ @SESSION.member->getState() }}</p>
                 <p class="profile">Seeking: {{ @SESSION.member->getSeeking() }}</p>
             </div>
-            {{ print_r(@SESSION.member->getIndoor()) }}
-            <check if="{{ !empty(@SESSION.member->getIndoor()) || !empty(@SESSION.member->getOutdoor())}}">
-                <p class="profile text-left">Interests:
-                    <check if="{{ !empty(@SESSION.member->getIndoor()) }}">
-                        {{ implode(", ", @SESSION.member->getIndoor()) }}
-                    </check>
+            <check if = " {{ @SESSION.member instanceof Premium }} " >
+                <h1>Premium</h1>
+                <check if="{{ !empty(@SESSION.member->getIndoor()) || !empty(@SESSION.member->getOutdoor())}}">
+                    <p class="profile text-left">Interests:
+                        <check if="{{ !empty(@SESSION.member->getIndoor()) }}">
+                            {{ implode(", ", @SESSION.member->getIndoor()) }}
+                        </check>
 
-                    <check if="{{ !empty(@SESSION.member->getIndoor()) || !empty(@SESSION.member->getOutdoor()) }}">
-                        , PASSED2
-                    </check>
+                        <check if="{{ !empty(@SESSION.member->getIndoor()) || !empty(@SESSION.member->getOutdoor()) }}">
+                            ,
+                        </check>
 
-                    <check if="{{ !empty(@SESSION.member->getOutdoor()) }}">
-                         {{ implode(", ", @SESSION.member->getOutdoor()) }}
-                    </check>
-                </p>
+                        <check if="{{ !empty(@SESSION.member->getOutdoor()) }}">
+                            {{ implode(", ", @SESSION.member->getOutdoor()) }}
+                        </check>
+                    </p>
+                </check>
             </check>
+
+
             <button class="btn btn-primary button">Contact me</button>
 
 
