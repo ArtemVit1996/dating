@@ -37,7 +37,6 @@
                 <p class="profile">Seeking: {{ @SESSION.member->getSeeking() }}</p>
             </div>
             <check if = " {{ @SESSION.member instanceof Premium }} " >
-                <h1>Premium</h1>
                 <check if="{{ !empty(@SESSION.member->getIndoor()) || !empty(@SESSION.member->getOutdoor())}}">
                     <p class="profile text-left">Interests:
                         <check if="{{ !empty(@SESSION.member->getIndoor()) }}">
